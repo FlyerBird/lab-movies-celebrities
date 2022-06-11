@@ -16,6 +16,6 @@ const celebritySchema = new Schema({
   }
 })
 
-const Season = mongoose.model('Celebrity.model', celebritySchema);
+const Celebrity = mongoose.model('Celebrity.model', celebritySchema);
 
 module.exports = Celebrity.model;
