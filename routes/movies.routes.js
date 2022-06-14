@@ -41,5 +41,19 @@ router.get("/create", async (req, res, next) => {
   });
 
 
+   /* GET movies Id route */
+  router.get("/:movieId", async (req, res, next) => {
+    const { movieId } = req.params;
+    
+    try {
+      const movies = await Movie.findById(movieId).populate("cast");
+      
+      res.render("movies/movie-details", {movies});
+    } catch (error) {
+      next(error);
+    }
+  });
+
+
 
 module.exports = router;
