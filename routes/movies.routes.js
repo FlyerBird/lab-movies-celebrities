@@ -27,19 +27,6 @@ router.get("/create", async (req, res, next) => {
     }
 })
   
-/* Post New Movie in DataBase*/
-  router.post("/create", async (req, res, next) => {
-  
-    const { title, genre, plot, cast } = req.body;
-    try {
-      await Movie.create({ title, genre, plot, cast });
-      res.redirect("/movies");
-    } catch (error) {
-      next(error);
-      res.redirect("/movies/create");
-    }
-  });
-
 
    /* GET movies Id route */
   router.get("/:movieId", async (req, res, next) => {
@@ -53,6 +40,29 @@ router.get("/create", async (req, res, next) => {
       next(error);
     }
   });
+
+  /* Post New Movie in DataBase*/
+  router.post("/create", async (req, res, next) => {
+  
+    const { title, genre, plot, cast } = req.body;
+    try {
+      await Movie.create({ title, genre, plot, cast });
+      res.redirect("/movies");
+    } catch (error) {
+      next(error);
+      res.redirect("/movies/create");
+    }
+  });
+
+  router.post('/:movieId/delete', async (req, res, next) => {
+    const { movieId } = req.params;
+    try {
+        await Movie.findByIdAndDelete(movieId)
+        res.redirect('/movies')
+    } catch (error) {
+        next(error)
+    }
+})
 
 
 
